@@ -24,7 +24,9 @@
         <li>
           <a href="#" (click)="addToShoppingList()">Add To Shopping List</a>
         </li>
-        <li><a href="#"> Edit Recipe</a></li>
+        <li>
+          <a [routerLink]="['/recipes', recipe.id, 'edit']">Edit Recipe</a>
+        </li>
         <li><a href="#">Delete Recipe</a></li>
       </ul>
     </div>
@@ -35,8 +37,8 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <ul>
-      <li *ngFor="let ingredient of recipe.ingredients">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
         {{ ingredient.name }} ({{ ingredient.amount }})
       </li>
     </ul>
