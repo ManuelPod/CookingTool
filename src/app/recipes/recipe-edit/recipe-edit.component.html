@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form
+      (ngSubmit)="editMode ? editRecipe(form) : addRecipe(form)"
+      #form="ngForm"
+    >
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit">Save</button>
+          <button type="button">Cancel</button>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input class="form-control" type="text" id="name" name="name" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="imagePath">Image Url</label>
+              <input
+                class="form-control"
+                type="text"
+                id="imagePath"
+                name="imagePath"
+              />
+              <div class="row">
+                <div class="col-xs-12">
+                  <img [src]="form.value.imagePath" class="img-responsive" />
+                </div>
+              </div>
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea
+                    class="form-control"
+                    type="text"
+                    id="description"
+                    name="description"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
