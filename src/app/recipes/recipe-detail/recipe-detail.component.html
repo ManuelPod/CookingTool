@@ -25,9 +25,9 @@
           <a href="#" (click)="addToShoppingList()">Add To Shopping List</a>
         </li>
         <li>
-          <a [routerLink]="['/recipes', recipe.id, 'edit']">Edit Recipe</a>
+          <a [routerLink]="['/recipes', id, 'edit']">Edit Recipe</a>
         </li>
-        <li><a href="#">Delete Recipe</a></li>
+        <li><a (click)="deleteRecipe(id)">Delete Recipe</a></li>
       </ul>
     </div>
   </div>

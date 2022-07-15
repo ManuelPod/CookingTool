@@ -1,16 +1,16 @@
 import { Recipe } from '../recipes/recipe.model';
-import { EventEmitter, Output } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { Subject } from 'rxjs';
 
 export class RecipeService {
+  recipesChanged = new Subject<Recipe[]>();
+
   private recipes: Recipe[] = [
     new Recipe(
       'Carbonara',
       'Very gooooood!',
       'https://www.aheadofthyme.com/wp-content/uploads/2021/01/spaghetti-carbonara.jpg',
-      [new Ingredient('Oeufs', 3)],
-      1
+      [new Ingredient('Oeufs', 3)]
     ),
     new Recipe(
       'Burger',
@@ -22,15 +22,50 @@ export class RecipeService {
         new Ingredient('Tomates', 2),
         new Ingredient('Brie', 1),
         new Ingredient('Pain burger', 4),
-      ],
-      2
+      ]
+    ),
+    new Recipe(
+      'Eggs',
+      'Eggs',
+      'https://cdn.britannica.com/94/151894-050-F72A5317/Brown-eggs.jpg',
+      [new Ingredient('Eggs', 4)]
     ),
   ];
+
   getRecipes() {
     return this.recipes.slice();
   }
 
   getRecipe(id: number) {
-    return this.recipes.find((recipe: Recipe) => recipe.id === id);
+    return this.recipes[id];
+  }
+
+  addRecipe(
+    imagePath: string,
+    name: string,
+    description: string,
+    ingredients: Ingredient[],
+    id: number
+  ) {
+    this.recipes.push(new Recipe(name, description, imagePath, ingredients));
+    this.updateRecipes();
+  }
+
+  updateRecipe(index, recipe) {
+    this.recipes[index] = new Recipe(
+      recipe.name,
+      recipe.description,
+      recipe.imagePath,
+      recipe.ingredients
+    );
+    this.updateRecipes();
+  }
+  updateRecipes() {
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index) {
+    this.recipes.splice(index, 1);
+    this.updateRecipes();
   }
 }
